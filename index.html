@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Em bé còn dỗi anh hong ạ 💕</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>" type="image/svg+xml">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 350px;
+            width: 100%;
+        }
+
+        .title {
+            font-size: 24px;
+            color: #ff6b9d;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .character {
+            font-size: 80px;
+            margin: 20px auto;
+            transition: all 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .character.crying {
+            animation: float 3s ease-in-out infinite, cryShake 0.3s ease-in-out infinite alternate;
+        }
+
+        @keyframes cryShake {
+            0% {
+                transform: translateY(0px) translateX(-2px);
+            }
+            100% {
+                transform: translateY(-10px) translateX(2px);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .crying {
+            animation: shake 0.5s ease-in-out infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-5px);
+            }
+            75% {
+                transform: translateX(5px);
+            }
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-family: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0px) scale(0.95);
+            transition: all 0.1s ease;
+        }
+
+        .btn-coa {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            color: #333;
+        }
+
+        .btn-hong {
+            background: linear-gradient(45deg, #a8edea, #fed6e3);
+            color: #333;
+        }
+
+        .message {
+            display: none;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .hearts {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff6b9d;
+            font-size: 20px;
+            animation: heartFloat 2s ease-out forwards;
+        }
+
+        @keyframes heartFloat {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-50px) scale(1.5);
+            }
+        }
+
+        .effect-text {
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+            color: #ff6b9d;
+            font-weight: bold;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 15px;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .show-effect {
+            animation: showEffect 3s ease-out;
+        }
+
+        @keyframes showEffect {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .typewriter {
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+            border-right: 3px solid #ff6b9d;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink-caret {
+            from, to {
+                border-color: transparent;
+            }
+            50% {
+                border-color: #ff6b9d;
+            }
+        }
+
+        .celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 22px;
+            }
+            
+            .btn {
+                padding: 16px 28px;
+                font-size: 18px;
+                min-width: 100px;
+            }
+            
+            .character {
+                font-size: 70px;
+            }
+
+            .effect-text {
+                font-size: 14px;
+                top: 8%;
+                padding: 8px 12px;
+            }
+
+            .buttons {
+                gap: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Em bé còn dỗi anh không ạ? 🥺</h1>
+        
+        <div class="character" id="character">😊</div>
+        
+        <div class="buttons" id="buttons">
+            <button class="btn btn-coa" id="btnCoa">Cóa 😤</button>
+            <button class="btn btn-hong" id="btnHong">Hong 😌</button>
+        </div>
+        
+        <div class="effect-text" id="effectText"></div>
+        
+        <div class="message" id="message">
+            <div id="typewriterText"></div>
+        </div>
+    </div>
+
+    <div class="hearts" id="hearts"></div>
+    <div class="celebration" id="celebration"></div>
+
+    <script>
+        let coaClickCount = 0;
+        let effectTimeout = null;
+        const character = document.getElementById('character');
+        const btnCoa = document.getElementById('btnCoa');
+        const btnHong = document.getElementById('btnHong');
+        const effectText = document.getElementById('effectText');
+        const message = document.getElementById('message');
+        const typewriterText = document.getElementById('typewriterText');
+        const hearts = document.getElementById('hearts');
+        const celebration = document.getElementById('celebration');
+
+        const animeEmojis = ['😊', '😟', '😫','😢', '😭','💔'];
+        const effectTexts = [
+            'Em bé hong dỗi nữa mòa 🥺',
+            'Duydong xin lũi em bé nhìu ạ 💕',
+            'Sau mua trà sữa choa bé nhoa 🧋',
+            'Huhu 😢',
+            'Huhu 😭',
+            'Huhu 💔'
+        ];
+
+        const loveMessage = `Hì bé iuuu hong dỗi rùi nữa nì! 💕 Hơi vô tri ạ, Duydong làm cái nì một phần để em bé vui, nhìu phần để em bé thấy là vẫn lun cóa Duydong ở đây. Bé iuuu hong bao giờ cô đơn cả, nên là mình hãy suy nghĩ thoải mái nên ạ, nó vẫn lun như vậy thì sao mình phải nghĩ quá nhìu nì. Bé iuuu vui lên là càng xinh đẹp nì hihi. Iuuu em rất nhìu ạ! 💖✨`;
+
+        btnCoa.addEventListener('click', () => {
+            coaClickCount++;
+            
+            // Clear previous effect timeout if exists
+            if (effectTimeout) {
+                clearTimeout(effectTimeout);
+                effectText.classList.remove('show-effect');
+            }
+            
+            // Update character emoji and size - bigger crying as more clicks
+            const emojiIndex = Math.min(coaClickCount, animeEmojis.length - 1);
+            character.textContent = animeEmojis[emojiIndex];
+            character.classList.add('crying');
+            
+            // Make character bigger when crying more
+            const baseSize = window.innerWidth <= 480 ? 70 : 80;
+            const newSize = baseSize + (coaClickCount * 10);
+            character.style.fontSize = newSize + 'px';
+            
+            // Show effect text
+            effectText.textContent = effectTexts[Math.min(coaClickCount - 1, effectTexts.length - 1)];
+            effectText.classList.add('show-effect');
+            
+            // Longer timeout for text display - increased from 3s to 5s
+            effectTimeout = setTimeout(() => {
+                effectText.classList.remove('show-effect');
+                effectTimeout = null;
+            }, 5000);
+            
+            // Shrink Coa button and grow Hong button - faster scaling
+            const coaScale = Math.max(0.2, 1 - (coaClickCount * 0.25));
+            const hongScale = 1 + (coaClickCount * 0.2);
+            
+            btnCoa.style.transform = `scale(${coaScale})`;
+            btnHong.style.transform = `scale(${hongScale})`;
+            
+            // Create floating hearts
+            createFloatingHearts();
+        });
+
+        btnHong.addEventListener('click', () => {
+            // Clear any existing effect timeout
+            if (effectTimeout) {
+                clearTimeout(effectTimeout);
+                effectText.classList.remove('show-effect');
+                effectTimeout = null;
+            }
+            
+            // Hide buttons and title
+            document.getElementById('buttons').style.display = 'none';
+            document.querySelector('.title').style.display = 'none';
+            
+            // Show celebration with love emoji
+            character.textContent = '🥰';
+            character.classList.remove('crying');
+            character.style.fontSize = '120px';
+            
+            // Show "zeee" effect
+            effectText.textContent = 'Zeeee! 🎉✨';
+            effectText.style.fontSize = '24px';
+            effectText.style.top = '10%';
+            effectText.classList.add('show-effect');
+            
+            // Create celebration effects
+            createCelebration();
+            
+            setTimeout(() => {
+                effectText.classList.remove('show-effect');
+                showMessage();
+            }, 2000);
+        });
+
+        function createFloatingHearts() {
+            const heartEmojis = ['💖', '💝', '💕', '💗', '💘'];
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                    heart.className = 'heart';
+                    heart.style.left = Math.random() * window.innerWidth + 'px';
+                    heart.style.top = Math.random() * window.innerHeight + 'px';
+                    heart.style.fontSize = (15 + Math.random() * 10) + 'px';
+                    hearts.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 2000);
+                }, i * 150);
+            }
+        }
+
+        function createCelebration() {
+            const celebrationEmojis = ['🎉', '✨', '💖', '🌟', '💕', '🎊'];
+            
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const emoji = document.createElement('div');
+                    emoji.textContent = celebrationEmojis[Math.floor(Math.random() * celebrationEmojis.length)];
+                    emoji.style.position = 'absolute';
+                    emoji.style.left = Math.random() * window.innerWidth + 'px';
+                    emoji.style.top = Math.random() * window.innerHeight + 'px';
+                    emoji.style.fontSize = '20px';
+                    emoji.style.pointerEvents = 'none';
+                    emoji.style.animation = 'heartFloat 3s ease-out forwards';
+                    celebration.appendChild(emoji);
+                    
+                    setTimeout(() => {
+                        emoji.remove();
+                    }, 3000);
+                }, i * 100);
+            }
+        }
+
+        function showMessage() {
+            message.style.display = 'block';
+            typeWriter(loveMessage, typewriterText);
+        }
+
+        function typeWriter(text, element, speed = 50) {
+            element.innerHTML = '';
+            element.style.whiteSpace = 'pre-wrap';
+            element.style.borderRight = '3px solid #ff6b9d';
+            
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    // Remove cursor after typing is done
+                    setTimeout(() => {
+                        element.style.borderRight = 'none';
+                    }, 1000);
+                }
+            }
+            type();
+        }
+
+        // Add vibration for mobile devices (if supported)
+        function addVibration() {
+            if (navigator.vibrate) {
+                navigator.vibrate(100); // Vibrate for 100ms
+            }
+        }
+
+        // Add sound effects (optional - can be enabled later)
+        function playClickSound() {
+            // Create a simple beep sound using Web Audio API
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = coaClickCount > 3 ? 200 : 400; // Lower pitch when sadder
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.1, audioContext.currentTime + 0.01);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.1);
+        }
+
+        // Enhanced button clicks with vibration
+        const originalCoaClick = btnCoa.onclick;
+        btnCoa.addEventListener('click', () => {
+            addVibration();
+            // Uncomment the line below to enable sound effects
+            // playClickSound();
+        });
+
+        btnHong.addEventListener('click', () => {
+            addVibration();
+            // Different vibration pattern for Hong button
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100]); // Happy vibration pattern
+            }
+        });
+
+        // Remove shake effect after animation
+        character.addEventListener('animationend', (e) => {
+            if (e.animationName === 'shake') {
+                character.classList.remove('crying');
+            }
+        });
+    </script>
+</body>
+</html> 
