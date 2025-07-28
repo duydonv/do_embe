@@ -316,7 +316,7 @@
             'Huhu 💔'
         ];
 
-        const loveMessage = `Hì bé iuuu hong dỗi rùi nữa nì! 💕 Hơi vô tri ạ, duydong làm cái nì một phần để em bé vui, nhìu phần để em bé thấy là vẫn lun cóa duydong ở đây. Bé iuuu hong bao giờ cô đơn cả, nên là mình hãy suy nghĩ thoải mái nên ạ, nó vẫn lun như vậy thì sao mình phải nghĩ quá nhìu nì. Bé iuuu vui lên là càng xinh đẹp nì hihi. Iuuu em rất nhìu ạ! ☺️🥰`;
+        const loveMessage = `Hì bé iuuu hong dỗi rùi nữa nì! 💕 Hơi vô tri ạ, Duydong làm cái nì một phần để em bé vui, nhìu phần để em bé thấy là vẫn lun cóa Duydong ở đây. Bé iuuu hong bao giờ cô đơn cả, nên là mình hãy suy nghĩ thoải mái nên ạ, nó vẫn lun như vậy thì sao mình phải nghĩ quá nhìu nì. Bé iuuu vui lên là càng xinh đẹp nì hihi. Iuuu em rất nhìu ạ! 💖✨`;
 
         btnCoa.addEventListener('click', () => {
             coaClickCount++;
@@ -337,8 +337,12 @@
             const newSize = baseSize + (coaClickCount * 10);
             character.style.fontSize = newSize + 'px';
             
-            // Show effect text
+            // Show effect text with animation restart fix
             effectText.textContent = effectTexts[Math.min(coaClickCount - 1, effectTexts.length - 1)];
+            
+            // Force animation restart by removing class, forcing reflow, then adding class back
+            effectText.classList.remove('show-effect');
+            void effectText.offsetHeight; // Force reflow to reset animation
             effectText.classList.add('show-effect');
             
             // Longer timeout for text display - increased from 3s to 5s
